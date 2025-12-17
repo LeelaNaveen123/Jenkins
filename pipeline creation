@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    stages {
+        stage("hi leela") {
+            steps {
+                sh "touch aws"
+                sh "touch azure"
+                sh "touch devops"
+            }
+        }
+        
+            stage("directory"){
+                steps {
+                    sh "mkdir test"
+                }
+            }
+            stage("test12") {
+                steps {
+                    sh "mkdir test1"
+                }
+            }
+}
+post {
+        success {
+            mail to: 'rlnnaidu2001@gmail.com',
+                 subject: 'Build Success',
+                 body: "Your Jenkins Pipeline build is successful!"
+        }
+        failure {
+            mail to: 'rlnnaidu2001@gmail.com',
+                 subject: 'Build Failed ❌',
+                 body: "Build failed. Please check Jenkins console logs."
+        }
+}
+}
