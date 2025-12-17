@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage ('git checkout') {
+            steps {
+                git "https://github.com/azuredevops7/pwj-netflix-clone.git"
+            }
+        }
+        stage ('Build') {
+            steps {
+                sh 'docker build -t $repo .'
+            }
+        }
+        stage ('docker login') {
+            steps {
+                sh 'docker login -u $username -p $password'
+            }
+        }
+        stage ('docker hub') {
+            steps {
+                sh 'docker push $repo'
+            }
+    }    dockerhub integation
